@@ -1,17 +1,22 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getPublishedPosts } from '@/lib/blog-data';
+import { getPosts, toRenderPost, type RenderPost } from '@/lib/api';
 
 // Revalidate every 24 hours (86400 seconds) so scheduled posts surface automatically
-export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: 'Blog | Shoe Factory Los Angeles',
   description: 'Insights on footwear manufacturing, development, and launching your own shoe line. Expert guidance from Shoe Factory Los Angeles.',
 };
 
-export default function BlogPage() {
-  const publishedPosts = getPublishedPosts();
+const SITE_DOMAIN = 'shoefactorylosangeles.com';
+
+export const revalidate = 60;
+
+export default async function BlogPage() {
+  const apiPosts = await getPosts(SITE_DOMAIN);
+  const publishedPosts: RenderPost[] = apiPosts.length > 0 ? apiPosts.map(toRenderPost) : getPublishedPosts();
 
   return (
     <div>

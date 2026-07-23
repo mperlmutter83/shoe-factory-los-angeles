@@ -2,9 +2,20 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/blog-data';
+import { getPost, toRenderPost, type RenderPost } from '@/lib/api';
+
+const SITE_DOMAIN = 'shoefactorylosangeles.com';
+
+export const revalidate = 60;
+
+async function resolvePost(slug: string): Promise<RenderPost | undefined> {
+  const apiPost = await getPost(SITE_DOMAIN, slug);
+  if (apiPost) return toRenderPost(apiPost);
+  return getPostBySlug(slug);
+}
+
 
 // Revalidate every 24 hours (86400 seconds) so scheduled posts surface automatically
-export const revalidate = 86400;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await resolvePost(slug);
   
   if (!post) {
     return { title: 'Post Not Found' };
@@ -40,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await resolvePost(slug);
 
   if (!post) {
     notFound();
