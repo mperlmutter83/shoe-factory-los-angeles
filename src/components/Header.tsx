@@ -14,11 +14,12 @@ export default function Header() {
           <Link href="/services" className="hover:text-amber-600">Services</Link>
           <Link href="/blog" className="hover:text-amber-600">Blog</Link>
           <Link href="/contact" className="hover:text-amber-600">Contact Us</Link>
+          <Link href="/book" className="bg-amber-600 text-white px-4 py-2 font-medium hover:bg-amber-700">Book Now</Link>
           <a href="tel:+13239184993" className="text-amber-600 font-bold">(323) 918-4993</a>
         </nav>
         <button className="md:hidden" onClick={() => setOpen(!open)}>☰</button>
       </div>
-      {open && <nav className="md:hidden px-4 pb-4 space-y-2"><Link href="/" className="block">Home</Link><Link href="/about" className="block">About</Link><Link href="/services" className="block">Services</Link><Link href="/blog" className="block">Blog</Link><Link href="/contact" className="block">Contact</Link></nav>}
+      {open && <nav className="md:hidden px-4 pb-4 space-y-2"><Link href="/" className="block">Home</Link><Link href="/about" className="block">About</Link><Link href="/services" className="block">Services</Link><Link href="/blog" className="block">Blog</Link><Link href="/contact" className="block">Contact</Link><Link href="/book" className="block text-amber-600 font-bold">Book Now</Link></nav>}
     </header>
   );
 }

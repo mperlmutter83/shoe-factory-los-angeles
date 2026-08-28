@@ -11,7 +11,7 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 py-20 text-white">
           <p className="text-amber-400 tracking-widest">Find Your Own Style</p>
           <h1 className="text-5xl md:text-6xl font-bold mt-2 mb-6">Shoe Factory<br/>Los Angeles</h1>
-          <Link href="/contact" className="inline-block bg-amber-600 px-8 py-3 font-medium hover:bg-amber-700">Make An Appointment</Link>
+          <Link href="/book" className="inline-block bg-amber-600 px-8 py-3 font-medium hover:bg-amber-700">Make An Appointment</Link>
         </div>
       </section>
       <section className="py-16 bg-white">
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
       <section className="py-16 bg-amber-600 text-white text-center">
         <h2 className="text-3xl font-bold mb-4">Book An Appointment Today</h2>
-        <Link href="/contact" className="inline-block bg-white text-amber-600 px-8 py-3 font-bold hover:bg-gray-100">Book Now</Link>
+        <Link href="/book" className="inline-block bg-white text-amber-600 px-8 py-3 font-bold hover:bg-gray-100">Book Now</Link>
       </section>
     </div>
   );
