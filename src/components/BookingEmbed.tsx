@@ -9,6 +9,12 @@ export default function BookingEmbed() {
     const ORIGIN = 'https://yescrew-dashboard.vercel.app';
 
     const handleMessage = (e: MessageEvent) => {
+      if (e.data && e.data.type === "yescrew:embed:booked") {
+        // GA4/GTM conversion event for confirmed bookings inside the iframe.
+        const dlWindow = window as unknown as { dataLayer?: Record<string, unknown>[] };
+        dlWindow.dataLayer = dlWindow.dataLayer ?? [];
+        dlWindow.dataLayer.push({ event: "book_appointment" });
+      }
       if (e.origin !== ORIGIN || !iframeRef.current) return;
 
       const d = e.data;
