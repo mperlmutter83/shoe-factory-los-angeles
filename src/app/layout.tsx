@@ -15,6 +15,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* RFM site data - pushed before GTM loads */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  rfm: {
+    schema_version: "1.0",
+    site_id: "shoe_factory_los_angeles",
+    provider_id: "d6968910-cd0a-421e-86f7-07c298ca1c90",
+    provider_name: "Shoe Factory Los Angeles",
+    service_category: "shoe_manufacturing",
+    market: "los_angeles"
+  }
+});`,
+          }}
+        />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
